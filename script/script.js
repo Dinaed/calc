@@ -89,7 +89,7 @@ document.querySelector('.calc__buttons').addEventListener('click', (event) => {
         break;
     }
     finish = true;
-    out.textContent = firstNum;
+    out.textContent = String(firstNum).slice(0, 9);
     console.log(firstNum, sign, secocndNum);
   }
 });
