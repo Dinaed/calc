@@ -5,7 +5,8 @@ let finish = false;
 
 const digit = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'];
 const action = ['-', '+', '*', '/'];
-
+const plusMinus = '+/-';
+const percent = '%';
 const out = document.querySelector('.calc__screen p');
 
 function clearAll() {
@@ -37,13 +38,30 @@ document.querySelector('.calc__buttons').addEventListener('click', (event) => {
       secocndNum+= key;
       out.textContent = secocndNum;
     }
-    console.log(firstNum, sign, secocndNum);
     return;
   }
   if(action.includes(key)){
     sign = key;
     out.textContent = sign;
     return;
+  }
+  if(key === plusMinus){
+    if(firstNum !== '' && secocndNum === ''){
+      firstNum = -firstNum;
+      out.textContent = firstNum;
+    }
+    else if(firstNum !== ''){
+      secocndNum = -secocndNum;
+      out.textContent = secocndNum;
+    }
+    return;
+  }
+  if(key === percent){
+    if(firstNum !== '' && secocndNum !== ''){
+      secocndNum = firstNum * secocndNum / 100;
+      out.textContent = secocndNum;
+      console.log(firstNum, sign, secocndNum);
+    }
   }
   if(key === '=') {
     if(secocndNum === ''){
@@ -54,20 +72,20 @@ document.querySelector('.calc__buttons').addEventListener('click', (event) => {
         firstNum = (+firstNum) + (+secocndNum);
         break;
       case '-':
-        firstNum = firstNum - secocndNum;
+        firstNum = firstNum - (secocndNum);
         break;
       case '*':
-        firstNum = firstNum * secocndNum;
+        firstNum = firstNum * (secocndNum);
         break;
       case '/':
-        if(secocndNum === '0'){
+        if(secocndNum == '0'){
           out.textContent = 'Error!'
           firstNum = '';
           secocndNum = '';
           sign = '';
           return
         }
-        firstNum = firstNum / secocndNum;
+        firstNum = firstNum / (secocndNum);
         break;
     }
     finish = true;
