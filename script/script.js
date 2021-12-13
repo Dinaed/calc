@@ -27,6 +27,9 @@ document.querySelector('.calc__buttons').addEventListener('click', (event) => {
   if(digit.includes(key)){
     if( secocndNum === '' && sign === ''){
       firstNum+=key;
+      if(firstNum.length > 8){
+        firstNum = firstNum.substring(0,8);
+      }
       out.textContent = firstNum;
     }
     else if (firstNum !== '' && secocndNum !== '' && finish){
@@ -36,6 +39,9 @@ document.querySelector('.calc__buttons').addEventListener('click', (event) => {
     }
     else {
       secocndNum+= key;
+      if(secocndNum.length > 8){
+        secocndNum = secocndNum.substring(0,8);
+      }
       out.textContent = secocndNum;
     }
     return;
@@ -63,6 +69,7 @@ document.querySelector('.calc__buttons').addEventListener('click', (event) => {
       console.log(firstNum, sign, secocndNum);
     }
   }
+  
   if(key === '=') {
     if(secocndNum === ''){
       secocndNum = firstNum;
